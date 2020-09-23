@@ -1,0 +1,40 @@
+{
+  "name": "scoutcrypt",
+  "description": "A web app to encrypt and download messages for scouts.",
+  "author": "David Pfahler",
+  "version": "0.0.1",
+  "homepage": "https://theshmoo.github.io/ScoutCrypt",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "gh-pages": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-helmet": "latest",
+    "react-lazyload": "latest",
+    "react-router-dom": "latest",
+    "react-scripts": "latest",
+    "react-select": "latest"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "repository": "github:theShmoo/ScoutCrypt",
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "license": "MIT"
+}
