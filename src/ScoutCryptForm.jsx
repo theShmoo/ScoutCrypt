@@ -45,48 +45,44 @@ function ScoutTextField({ text, onChange }) {
   </>
 };
 
-function ScoutMethodSelect({ method, onChange }) {
+function ScoutSelect({ id, title, options, option, onChange }) {
   const classes = useStyles();
 
-  const methodItems = Methods.map(m => <MenuItem value={m.name} key={m.name}>{m.name}</MenuItem>);
+  const optionItems = options.map(o => <MenuItem value={o.name} key={o.name}>{o.name}</MenuItem>);
 
   return <>
-    <InputLabel htmlFor="method">Verschlüsselungsmethode</InputLabel>
+    <InputLabel htmlFor={id}>{title}</InputLabel>
     <Select
-      value={method.name}
+      value={option.name}
       onChange={onChange}
       className={classes.controlElement}
       fullWidth
       inputProps={{
-        name: 'method',
-        id: 'method',
+        name: id,
+        id: id,
       }}
     >
-      {methodItems}
+      {optionItems}
     </Select>
   </>
+}
+
+function ScoutMethodSelect({ method, onChange }) {
+  return <ScoutSelect
+    title="Verschlüsselungsmethode"
+    id="method"
+    options={Methods}
+    option={method}
+    onChange={onChange} />
 };
 
 function ScoutFormatSelect({ format, onChange }) {
-  const classes = useStyles();
-
-  const formatItems = Formats.map(m => <MenuItem value={m.name} key={m.name}>{m.name}</MenuItem>);
-
-  return <>
-    <InputLabel htmlFor="format">Ausgabeformat</InputLabel>
-    <Select
-      value={format.name}
-      onChange={onChange}
-      className={classes.controlElement}
-      fullWidth
-      inputProps={{
-        name: 'format',
-        id: 'format',
-      }}
-    >
-      {formatItems}
-    </Select>
-  </>
+  return <ScoutSelect
+    title="Ausgabeformat"
+    id="method"
+    options={Formats}
+    option={format}
+    onChange={onChange} />
 };
 
 export default function ScoutCryptForm({ text, textChange, method, methodChange, format, formatChange }) {
