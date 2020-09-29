@@ -2,14 +2,13 @@ import React from 'react';
 
 import { Methods } from './ScoutMethods.jsx'
 import { Formats } from './ScoutFormats.jsx'
+import ScoutSelect from './ScoutSelect.jsx'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,28 +44,6 @@ function ScoutTextField({ text, onChange }) {
   </>
 };
 
-function ScoutSelect({ id, title, options, option, onChange }) {
-  const classes = useStyles();
-
-  const optionItems = options.map(o => <MenuItem value={o.name} key={o.name}>{o.name}</MenuItem>);
-
-  return <>
-    <InputLabel htmlFor={id}>{title}</InputLabel>
-    <Select
-      value={option.name}
-      onChange={onChange}
-      className={classes.controlElement}
-      fullWidth
-      inputProps={{
-        name: id,
-        id: id,
-      }}
-    >
-      {optionItems}
-    </Select>
-  </>
-}
-
 function ScoutMethodSelect({ method, onChange }) {
   return <ScoutSelect
     title="Verschlüsselungsmethode"
@@ -88,13 +65,13 @@ function ScoutFormatSelect({ format, onChange }) {
 export default function ScoutCryptForm({ text, textChange, method, methodChange, format, formatChange }) {
 
   const classes = useStyles();
-
   return <Paper square elevation={4} className={classes.root}>
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <form className={classes.form} autoComplete="off">
           <ScoutTextField text={text} onChange={textChange} />
           <ScoutMethodSelect method={method} onChange={methodChange} />
+          {method.config ? method.config({ method, methodChange, classes }) : ""}
           <ScoutFormatSelect format={format} onChange={formatChange} />
         </form>
       </Grid>
