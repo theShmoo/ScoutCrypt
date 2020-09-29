@@ -3,7 +3,7 @@ import React from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 
-export function GundlSpezlConfig({ method, onChange, classes }) {
+export function GundlSpezlConfig({ method, configChange, classes }) {
 
   const { gundl, spezl } = method.configState;
   return <>
@@ -12,7 +12,14 @@ export function GundlSpezlConfig({ method, onChange, classes }) {
       id="gundl"
       className={classes.controlElement}
       fullWidth
-      onChange={onChange}
+      onChange={
+        event => {
+          configChange({
+            method: method.name,
+            state: { gundl: event.target.value, spezl: spezl }
+          });
+        }
+      }
       defaultValue={gundl}
     />
     <InputLabel htmlFor="spezl">Key 2</InputLabel>
@@ -20,7 +27,14 @@ export function GundlSpezlConfig({ method, onChange, classes }) {
       id="spezl"
       className={classes.controlElement}
       fullWidth
-      onChange={onChange}
+      onChange={
+        event => {
+          configChange({
+            method: method.name,
+            state: { gundl: gundl, spezl: event.target.value }
+          });
+        }
+      }
       defaultValue={spezl}
     />
   </>

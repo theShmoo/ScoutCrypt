@@ -3,7 +3,7 @@ import React from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 
-export function ANConfig({ method, onChange, classes }) {
+export function ANConfig({ method, configChange, classes }) {
   const { shift } = method.configState;
   return <>
     <InputLabel htmlFor="an">Shift</InputLabel>
@@ -12,7 +12,7 @@ export function ANConfig({ method, onChange, classes }) {
       type="number"
       fullWidth
       className={classes.controlElement}
-      onChange={onChange}
+      onChange={configChange}
       defaultValue={shift}
     />
   </>

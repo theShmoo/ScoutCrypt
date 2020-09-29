@@ -10,6 +10,10 @@ function PigPenSelect({ pigpen, onChange }) {
     onChange={onChange} />
 };
 
-export function PigPenConfig({ method, onChange }) {
-  return <PigPenSelect onChange={onChange} pigpen={method.configState} />
+export function PigPenConfig({ method, configChange }) {
+  return <PigPenSelect
+    onChange={
+      event => { configChange({ method: method.name, state: { name: event.target.value } }); }
+    }
+    pigpen={method.configState} />
 }

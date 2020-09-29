@@ -62,7 +62,9 @@ function ScoutFormatSelect({ format, onChange }) {
     onChange={onChange} />
 };
 
-export default function ScoutCryptForm({ text, textChange, method, methodChange, format, formatChange }) {
+export default function ScoutCryptForm({
+  text, method, format,
+  textChange, methodChange, configChange, formatChange }) {
 
   const classes = useStyles();
   return <Paper square elevation={4} className={classes.root}>
@@ -71,7 +73,7 @@ export default function ScoutCryptForm({ text, textChange, method, methodChange,
         <form className={classes.form} autoComplete="off">
           <ScoutTextField text={text} onChange={textChange} />
           <ScoutMethodSelect method={method} onChange={methodChange} />
-          {method.config ? method.config({ method, methodChange, classes }) : ""}
+          {method.config ? method.config({ method, configChange, classes }) : ""}
           <ScoutFormatSelect format={format} onChange={formatChange} />
         </form>
       </Grid>
