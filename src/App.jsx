@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ScoutToolbar from './ScoutToolbar.jsx'
 import ScoutCryptForm from './ScoutCryptForm.jsx'
+import ScoutCryptAnswer from './ScoutCryptAnswer.jsx'
 import { DefaultMethod, Methods } from './ScoutMethods.jsx'
 import { DefaultFormat, Formats } from './ScoutFormats.jsx'
 
@@ -46,19 +47,19 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    const { text, method, format } = this.state;
-
     return <div className={classes.root}>
       <ScoutToolbar />
       <ScoutCryptForm
-        text={text}
-        method={method}
-        format={format}
+        {...this.state}
         formatChange={this.setFormat}
         methodChange={this.setMethod}
         configChange={this.setMethodConfig}
         textChange={this.setText}
       />
+      {
+        this.state.text && this.state.method.configState.valid ?
+          <ScoutCryptAnswer {...this.state} /> : ""
+      }
     </div>
   }
 }

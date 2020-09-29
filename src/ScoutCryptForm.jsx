@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,6 +72,11 @@ export default function ScoutCryptForm({
   const classes = useStyles();
   return <Paper square elevation={4} className={classes.root}>
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h5" component="h5">
+          Scout Crypt
+        </Typography>
+      </Grid>
       <Grid item xs={12}>
         <form className={classes.form} autoComplete="off">
           <ScoutTextField text={text} onChange={textChange} />
