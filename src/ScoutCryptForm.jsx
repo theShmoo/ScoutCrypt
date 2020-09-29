@@ -56,6 +56,7 @@ function ScoutMethodSelect({ method, onChange }) {
     onChange={onChange} />
 };
 
+/* not yet used
 function ScoutFormatSelect({ format, onChange }) {
   return <ScoutSelect
     title="Ausgabeformat"
@@ -64,6 +65,7 @@ function ScoutFormatSelect({ format, onChange }) {
     option={format}
     onChange={onChange} />
 };
+*/
 
 export default function ScoutCryptForm({
   text, method, format,
@@ -82,7 +84,7 @@ export default function ScoutCryptForm({
           <ScoutTextField text={text} onChange={textChange} />
           <ScoutMethodSelect method={method} onChange={methodChange} />
           {method.config ? method.config({ method, configChange, classes }) : ""}
-          <ScoutFormatSelect format={format} onChange={formatChange} />
+          {/*<ScoutFormatSelect format={format} onChange={formatChange} />*/}
         </form>
       </Grid>
     </Grid>

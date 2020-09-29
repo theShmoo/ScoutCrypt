@@ -11,13 +11,28 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: theme.spacing(1),
     marginTop: theme.spacing(3),
+  },
+  answer: {
+    fontFamily: "Monospace",
+    whiteSpace: "pre-line",
+    lineHeight: 1.2
   }
 }));
 
+function encrypt(text, method) {
+  return text.split('').map((c) => {
+    if (method.canBeEncrypted(c))
+      return method.encrypt(c, method.configState)
+    else if (c === ' ')
+      return '␣';
+    else
+      return c;
+  }).map(c => c + " ").join("");
+}
 
-export default function ScoutCryptAnswer({
-  text }) {
+export default function ScoutCryptAnswer({ text, method }) {
 
+  const encryptedText = encrypt(text, method)
   const classes = useStyles();
   return <Paper square elevation={4} className={classes.root}>
     <Grid container spacing={2}>
@@ -27,7 +42,12 @@ export default function ScoutCryptAnswer({
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        {text}
+        <Typography
+          variant="body1"
+          className={classes.answer}
+          style={method.configState.style}>
+          {encryptedText}
+        </Typography>
       </Grid>
     </Grid>
   </Paper>

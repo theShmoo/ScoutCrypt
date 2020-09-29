@@ -68,3 +68,28 @@ export function GundlSpezlConfig({ method, configChange, classes }) {
     </FormControl>
   </>
 }
+
+function findValue(c, gundl, spezl) {
+  const value1 = Math.floor(c / 5);
+  const value2 = c % 5;
+  return gundl[value2] + spezl[value1];
+}
+
+export function GundlSpezlCanBeEncrypted(c) {
+  return c.match(/[a-z]/i);
+}
+
+export function GundlSpezlEncrypt(c, config) {
+  const { gundl, spezl } = config;
+  const code = c.toUpperCase().charCodeAt();
+  if (code >= 65 && code <= 72) {
+    return findValue(code - 65, gundl, spezl);
+  }
+  else if (code === 73 || code === 74) {
+    return findValue(8, gundl, spezl);
+  }
+  else if (code >= 75 && code <= 90) {
+    return findValue(code - 66, gundl, spezl);
+  }
+  return c;
+}

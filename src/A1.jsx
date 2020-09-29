@@ -35,3 +35,16 @@ export function A1Config({ method, configChange, classes }) {
     />
   </FormControl >
 }
+
+export function A1CanBeEncrypted(c) {
+  return c.match(/[a-z]/i);
+}
+
+export function A1Encrypt(c, config) {
+  // alphabet letters amount
+  const { shift } = config;
+  const n = 26;
+  const code = c.charCodeAt();
+  const twist = code >= 65 && code <= 90 ? 65 : code >= 97 && code <= 122 ? 97 : 0;
+  return 1 + (code - twist + shift) % n;
+}

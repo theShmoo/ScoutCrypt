@@ -26,7 +26,8 @@ export function PigPenConfig({ method, configChange }) {
           method: method.name,
           state: {
             name: value,
-            valid: validate(value)
+            valid: validate(value),
+            style: method.configState.style
           },
         });
       }
@@ -34,4 +35,99 @@ export function PigPenConfig({ method, configChange }) {
     pigpen={method.configState}
     error={!method.configState.valid}
     errorMsg="Ungültige Methode" />
+}
+
+const Alphabets = {
+  "1": {
+    'a': 'A',
+    'b': 'J',
+    'c': 'B',
+    'd': 'K',
+    'e': 'C',
+    'f': 'L',
+    'g': 'D',
+    'h': 'M',
+    'i': 'E',
+    'j': 'N',
+    'k': 'F',
+    'l': 'O',
+    'm': 'G',
+    'n': 'P',
+    'o': 'H',
+    'p': 'Q',
+    'q': 'I',
+    'r': 'J',
+    's': 'S',
+    't': 'W',
+    'u': 'U',
+    'v': 'Y',
+    'w': 'V',
+    'x': 'Z',
+    'y': 'T',
+    'z': 'X'
+  },
+  "2": {
+    'a': 'A',
+    'b': 'J',
+    'c': 'B',
+    'd': 'K',
+    'e': 'C',
+    'f': 'L',
+    'g': 'D',
+    'h': 'M',
+    'i': 'E',
+    'j': 'N',
+    'k': 'F',
+    'l': 'O',
+    'm': 'G',
+    'n': 'P',
+    'o': 'H',
+    'p': 'Q',
+    'q': 'I',
+    'r': 'J',
+    's': 'S',
+    't': 'W',
+    'u': 'V',
+    'v': 'Z',
+    'w': 'T',
+    'x': 'X',
+    'y': 'U',
+    'z': 'Y'
+  },
+  "3": {
+    'a': 'A',
+    'b': 'B',
+    'c': 'C',
+    'd': 'D',
+    'e': 'E',
+    'f': 'F',
+    'g': 'G',
+    'h': 'H',
+    'i': 'I',
+    'j': 'J',
+    'k': 'K',
+    'l': 'L',
+    'm': 'M',
+    'n': 'N',
+    'o': 'O',
+    'p': 'P',
+    'q': 'Q',
+    'r': 'R',
+    's': 'S',
+    't': 'T',
+    'u': 'U',
+    'v': 'V',
+    'w': 'W',
+    'x': 'X',
+    'y': 'Y',
+    'z': 'Z'
+  }
+}
+
+export function PigPenCanBeEncrypted(c) {
+  return c.match(/[a-z]/i);
+}
+
+export function PigPenEncrypt(c, config) {
+  return Alphabets[config.name][c.toLowerCase()];
 }
