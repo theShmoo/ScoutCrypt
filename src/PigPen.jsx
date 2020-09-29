@@ -1,19 +1,37 @@
 import React from 'react';
 import ScoutSelect from './ScoutSelect.jsx'
 
-function PigPenSelect({ pigpen, onChange }) {
+const Options = [{ name: "1" }, { name: "2" }, { name: "3" }]
+
+function PigPenSelect({ pigpen, ...rest }) {
   return <ScoutSelect
-    title="choose"
+    title="Wähle"
     id="choose"
-    options={[{ name: "1" }, { name: "2" }, { name: "3" }]}
+    options={Options}
     option={pigpen}
-    onChange={onChange} />
+    {...rest} />
 };
+
+function validate(value) {
+  const found = Options.find(o => o.name === value);
+  return found !== undefined;
+}
 
 export function PigPenConfig({ method, configChange }) {
   return <PigPenSelect
     onChange={
-      event => { configChange({ method: method.name, state: { name: event.target.value } }); }
+      event => {
+        const { value } = event.target;
+        configChange({
+          method: method.name,
+          state: {
+            name: value,
+            valid: validate(value)
+          },
+        });
+      }
     }
-    pigpen={method.configState} />
+    pigpen={method.configState}
+    error={!method.configState.valid}
+    errorMsg="Ungültige Methode" />
 }

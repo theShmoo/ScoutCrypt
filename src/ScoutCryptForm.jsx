@@ -7,7 +7,7 @@ import ScoutSelect from './ScoutSelect.jsx'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,29 +19,31 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  formControl: {
-    margin: theme.spacing(1),
-  },
-  controlElement: {
+  fullWidth: {
     margin: theme.spacing(4),
+    width: "100%"
+  },
+  formControl: {
+    margin: theme.spacing(4),
+    minWidth: 150,
   }
 }));
 
 function ScoutTextField({ text, onChange }) {
   const classes = useStyles();
-  return <>
-    <InputLabel htmlFor="text">Der zu verschlüsselnde Text</InputLabel>
+  return <FormControl
+    className={classes.fullWidth}>
     <TextField
       id="text"
+      label="Der zu verschlüsselnde Text"
       onChange={onChange}
-      className={classes.controlElement}
       multiline
       rows={4}
       fullWidth
-      defaultValue={text}
+      value={text}
       variant="outlined"
     />
-  </>
+  </FormControl >
 };
 
 function ScoutMethodSelect({ method, onChange }) {

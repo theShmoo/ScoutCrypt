@@ -1,41 +1,70 @@
 import React from 'react';
 
-import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
+
+function validate(value) {
+  return value && value.length === 5;
+}
+
+function validateBoth(gundl, spezl) {
+  return validate(gundl) && validate(spezl);
+}
 
 export function GundlSpezlConfig({ method, configChange, classes }) {
 
-  const { gundl, spezl } = method.configState;
+  const { gundl, spezl, validGundl, validSpezl, valid } = method.configState;
   return <>
-    <InputLabel htmlFor="gundl">Key 1</InputLabel>
-    <TextField
-      id="gundl"
-      className={classes.controlElement}
-      fullWidth
-      onChange={
-        event => {
-          configChange({
-            method: method.name,
-            state: { gundl: event.target.value, spezl: spezl }
-          });
+
+    <FormControl error={!valid} className={classes.formControl}>
+      <TextField
+        id="gundl"
+        label="Key 1"
+        className={classes.controlElement}
+        error={!validGundl}
+        onChange={
+          event => {
+            const { value } = event.target;
+            configChange({
+              method: method.name,
+              state: {
+                gundl: value,
+                spezl: spezl,
+                validGundl: validate(value),
+                validSpezl: validate(spezl),
+                valid: validateBoth(value, spezl)
+              }
+            });
+          }
         }
-      }
-      defaultValue={gundl}
-    />
-    <InputLabel htmlFor="spezl">Key 2</InputLabel>
-    <TextField
-      id="spezl"
-      className={classes.controlElement}
-      fullWidth
-      onChange={
-        event => {
-          configChange({
-            method: method.name,
-            state: { gundl: gundl, spezl: event.target.value }
-          });
+        helperText={!validGundl ? "Muss genau 5 Buchstaben haben" : ""}
+        value={gundl}
+      />
+    </FormControl>
+    <FormControl className={classes.formControl}>
+      <TextField
+        id="spezl"
+        label="Key 2"
+        className={classes.controlElement}
+        error={!validSpezl}
+        onChange={
+          event => {
+            const { value } = event.target;
+            configChange({
+              method: method.name,
+              state: {
+                gundl: gundl,
+                spezl: value,
+                validGundl: validate(gundl),
+                validSpezl: validate(value),
+                valid: validateBoth(gundl, value)
+              }
+            });
+          }
         }
-      }
-      defaultValue={spezl}
-    />
+        helperText={!validSpezl ? "Muss genau 5 Buchstaben haben" : ""}
+        value={spezl}
+      />
+    </FormControl>
   </>
 }
