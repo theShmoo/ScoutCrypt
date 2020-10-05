@@ -1,8 +1,8 @@
 {
   "name": "scoutcrypt",
-  "description": "A web app to encrypt and download messages for scouts.",
+  "description": "A web app to encrypt messages for scouts.",
   "author": "David Pfahler",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": ".",
   "dependencies": {
     "@material-ui/core": "latest",

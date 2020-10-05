@@ -1,15 +1,26 @@
 import React from 'react';
-import ScoutSelect from './ScoutSelect.jsx'
+import ScoutSelect from './ScoutSelect.jsx';
+
+import FormControl from '@material-ui/core/FormControl';
 
 const Options = [{ name: "1" }, { name: "2" }, { name: "3" }]
 
-function PigPenSelect({ pigpen, ...rest }) {
-  return <ScoutSelect
-    title="Wähle"
-    id="choose"
-    options={Options}
-    option={pigpen}
-    {...rest} />
+function PigPenSelect({ pigpen, classes, ...rest }) {
+  return <>
+    <ScoutSelect
+      title="Wähle"
+      id="choose"
+      options={Options}
+      option={pigpen}
+      {...rest} />
+    <FormControl className={classes.formControl}>
+      <img
+        src={"img/eckal" + pigpen.name + "_small.png"}
+        alt={"Version " + pigpen.name}
+        className={classes.controlElement}
+      />
+    </FormControl>
+  </>
 };
 
 function validate(value) {
@@ -17,7 +28,7 @@ function validate(value) {
   return found !== undefined;
 }
 
-export function PigPenConfig({ method, configChange }) {
+export function PigPenConfig({ method, configChange, classes }) {
   return <PigPenSelect
     onChange={
       event => {
@@ -33,6 +44,7 @@ export function PigPenConfig({ method, configChange }) {
       }
     }
     pigpen={method.configState}
+    classes={classes}
     error={!method.configState.valid}
     errorMsg="Ungültige Methode" />
 }

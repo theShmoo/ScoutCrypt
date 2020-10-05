@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Methods } from './ScoutMethods.jsx'
-import { Formats } from './ScoutFormats.jsx'
 import ScoutSelect from './ScoutSelect.jsx'
 
 import { makeStyles } from '@material-ui/core/styles';
